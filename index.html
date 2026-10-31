@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Định dạng khung</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef2f6;--panel:#ffffff;--ink:#14243a;--muted:#5a6b80;--line:#c9d3df;
+  --accent:#1f6feb;--m:#fde3c8;--m-line:#e8914a;--p:#d3f0dc;--c:#cfe2fb;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f1b2b;--panel:#172538;--ink:#e6edf6;--muted:#93a4b9;--line:#2c3e55;--accent:#5b9cff;--m:#4a3320;--m-line:#e8914a;--p:#1d4030;--c:#1d3a63}
+}
+:root[data-theme="dark"]{--bg:#0f1b2b;--panel:#172538;--ink:#e6edf6;--muted:#93a4b9;--line:#2c3e55;--accent:#5b9cff;--m:#4a3320;--m-line:#e8914a;--p:#1d4030;--c:#1d3a63}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+main{max-width:980px;margin:0 auto;padding:28px 18px 48px}
+h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.1;margin:0 0 10px;font-weight:800;letter-spacing:-.02em}
+.lead{color:var(--muted);max-width:60ch;margin:0 0 26px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:760px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px}
+h2{font-size:1.05rem;margin:0 0 14px}
+.row{display:grid;grid-template-columns:110px 1fr 54px;gap:10px;align-items:center;margin-bottom:10px;font-size:.92rem}
+.row output{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.row.two{grid-template-columns:110px 1fr}
+input[type=range]{width:100%;accent-color:var(--accent)}
+select,input[type=color]{width:100%;height:36px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit;padding:0 8px}
+input[type=color]{padding:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.stage{display:flex;align-items:center;justify-content:center;min-height:360px;overflow:auto;background:
+  linear-gradient(var(--line) 1px,transparent 1px) 0 0/20px 20px,
+  linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/20px 20px;border-radius:8px}
+.m-layer{background:var(--m);outline:1px dashed var(--m-line);display:inline-block}
+.box{background:var(--p);display:block}
+.content{background:var(--c);padding:14px 18px;font-size:.9rem;text-align:center;min-width:140px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;font-size:.82rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid var(--line)}
+pre{margin:0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px;overflow-x:auto;font:.85rem/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+button{font:inherit;font-weight:700;background:var(--accent);color:#fff;border:0;border-radius:8px;padding:10px 16px;cursor:pointer;margin-top:12px}
+.span{grid-column:1/-1}
+</style>
+</head>
+<body>
+<main>
+  <h1>Định dạng khung</h1>
+  <p class="lead">Kéo các thanh trượt để chỉnh viền, khoảng đệm, lề, bo góc và đổ bóng của một khung HTML. Đoạn mã CSS bên dưới cập nhật theo thời gian thực.</p>
+
+  <div class="grid">
+    <section class="panel" aria-label="Điều chỉnh">
+      <h2>Điều chỉnh khung</h2>
+      <div class="row"><label for="border">Viền (border)</label><input id="border" type="range" min="0" max="24" value="4"><output></output></div>
+      <div class="row"><label for="padding">Đệm (padding)</label><input id="padding" type="range" min="0" max="60" value="24"><output></output></div>
+      <div class="row"><label for="margin">Lề (margin)</label><input id="margin" type="range" min="0" max="60" value="24"><output></output></div>
+      <div class="row"><label for="radius">Bo góc</label><input id="radius" type="range" min="0" max="60" value="12"><output></output></div>
+      <div class="row"><label for="shadow">Đổ bóng</label><input id="shadow" type="range" min="0" max="40" value="0"><output></output></div>
+      <div class="row two"><label for="style">Kiểu viền</label>
+        <select id="style"><option>solid</option><option>dashed</option><option>dotted</option><option>double</option><option>groove</option><option>ridge</option></select></div>
+      <div class="row two"><label for="color">Màu viền</label><input id="color" type="color" value="#1f6feb"></div>
+    </section>
+
+    <section class="panel" aria-label="Xem trước">
+      <h2>Xem trước</h2>
+      <div class="stage"><div class="m-layer" id="m"><div class="box" id="box"><div class="content">Nội dung (content)</div></div></div></div>
+      <div class="legend">
+        <span><i style="background:var(--m)"></i>Lề</span>
+        <span><i style="background:var(--p)"></i>Đệm</span>
+        <span><i style="background:var(--c)"></i>Nội dung</span>
+      </div>
+    </section>
+
+    <section class="panel span" aria-label="Mã CSS">
+      <h2>Mã CSS</h2>
+      <pre id="code"></pre>
+      <button id="copy" type="button">Sao chép mã</button>
+    </section>
+  </div>
+</main>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var ids=["border","padding","margin","radius","shadow","style","color"];
+  function update(){
+    var v={};ids.forEach(function(i){v[i]=$(i).value});
+    ["border","padding","margin","radius","shadow"].forEach(function(i){
+      $(i).parentNode.querySelector("output").textContent=v[i]+"px";
+    });
+    var box=$("box");
+    box.style.border=v.border+"px "+v.style+" "+v.color;
+    box.style.padding=v.padding+"px";
+    box.style.borderRadius=v.radius+"px";
+    box.style.boxShadow=v.shadow>0?"0 "+Math.round(v.shadow/2)+"px "+v.shadow+"px rgba(0,0,0,.3)":"none";
+    $("m").style.padding=v.margin+"px";
+    var css=".khung {\n  border: "+v.border+"px "+v.style+" "+v.color+";\n  padding: "+v.padding+"px;\n  margin: "+v.margin+"px;\n  border-radius: "+v.radius+"px;\n"+
+      (v.shadow>0?"  box-shadow: 0 "+Math.round(v.shadow/2)+"px "+v.shadow+"px rgba(0, 0, 0, 0.3);\n":"")+"}";
+    $("code").textContent=css;
+  }
+  ids.forEach(function(i){$(i).addEventListener("input",update)});
+  $("copy").addEventListener("click",function(){
+    var t=$("code").textContent,b=$("copy");
+    function done(){b.textContent="Đã sao chép";setTimeout(function(){b.textContent="Sao chép mã"},1500)}
+    try{navigator.clipboard.writeText(t).then(done,function(){})}catch(e){}
+  });
+  update();
+})();
+</script>
+</body>
+</html>
