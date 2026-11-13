@@ -1,5 +1,5 @@
 # Trang web phụ - Bài 16: Định dạng khung
-__Đề tài:__ Trang web giúp mọi người định dạng khung dễ hơn.
+__Đề tài:__ Trang web hỗ trợ định dạng khung.
 
 
 __Người thực hiện:__ Nhóm 10 Lớp 12A9<br>
